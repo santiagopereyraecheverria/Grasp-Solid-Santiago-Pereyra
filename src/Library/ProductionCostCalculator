@@ -1,0 +1,24 @@
+namespace Full_GRASP_And_SOLID.Library
+{
+    public class ProductionCostCalculator
+    {
+        public static double CalculateTotalProductionCost(Recipe recipe)
+        {
+            double totalCost = 0;
+
+            // Calcula el costo total de los insumos
+            foreach (Step step in recipe.Steps)
+            {
+                totalCost += step.Quantity * step.Input.UnitCost;
+            }
+
+            // Calcula el costo total del equipamiento
+            foreach (Step step in recipe.Steps)
+            {
+                totalCost += (step.Time / 60) * step.Equipment.HourlyCost; // Convierte el tiempo a horas
+            }
+
+            return totalCost;
+        }
+    }
+}
